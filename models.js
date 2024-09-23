@@ -3,8 +3,12 @@ import { randomUUID } from "node:crypto"
 //averiguar que importar de NODE para realizar el hash del pass
 //averiguar como "activar" la lectura de las variables de entorno del archivo .env (dotenv)
 import {handleError} from "./utils/handleError.js"
+
 //1- recuperar variables de entorno
 //2- declarar los metodos
+
+const userPath = path.join("./data/user.json")
+
 const getUsers =() => {
     try {
         } catch (error) {}
@@ -35,6 +39,6 @@ const deleteUser = (id) => {
     } catch (error) {}
 }
 
-export
+export { getUsers, getUserById, addUser, updateUser, deleteUser };
 
 
