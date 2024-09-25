@@ -1,17 +1,46 @@
-import {existsSync, readFileSync, writeFileSync} from "node:fs"
+import { existsSync, readFileSync, writeFileSync } from "node:fs"
 import { randomUUID } from "node:crypto"
 //averiguar que importar de NODE para realizar el hash del pass
 //averiguar como "activar" la lectura de las variables de entorno del archivo .env (dotenv)
-import {handleError} from "./utils/handleError.js"
+import { handleError } from "./utils/handleError.js"
 
 //1- recuperar variables de entorno
 //2- declarar los metodos
 
-const userPath = path.join("./data/user.json")
+//const userPath = path.join("./data/user.json")
 
-const getUsers =() => {
+const PATH_FILE_USER = process.env.PATH_FILE_USER;
+//console.log(PATH_FILE_USER)
+
+const getUsers = (urlFile) => {
     try {
-        } catch (error) {}
+        if (!urlFile) {
+            throw new Error("Access Denied");
+        }
+
+        if (!exists) {
+            writeFileSync(PATH_FILE_USER, JSON.stringify([]));
+            return [];
+        }
+
+        const users = JSON.parse(readFileSync(PATH_FILE_USER));
+        return users;
+    } catch (error) {
+        const objError = "./error/log.json"
+        handleError(error, objError)
+        return error.message;
+
+    }
+}
+
+
+
+const getUserById = (id) => {
+    try {
+
+    } catch (error) {
+
+    }
 }
 
 //addUser recibe un objeto con toda la data para el nuevo usuario
@@ -21,24 +50,24 @@ const getUsers =() => {
 //valida que el email sea un string y que no 
 
 const addUser = (user) => {
-    try { 
-    } catch (error) {}
+    try {
+    } catch (error) { }
 }
 
 //todos los datos del usuario seleccionado se podrian modificar menos el ID
 //si se modifica la pass deberia ser nuevamente hasheada
 //si se modifica el email, validad que este no exista
 
-const updateUser (userData) => {
+/*const updateUser(userData) => {
     try{
     } catch (error) {}
-}
+}*/
 
 const deleteUser = (id) => {
-    try { 
-    } catch (error) {}
+    try {
+    } catch (error) { }
 }
 
-export { getUsers, getUserById, addUser, updateUser, deleteUser };
-
+//export { getUsers, getUserById, addUser, updateUser, deleteUser };
+export { getUsers, getUserById, addUser, deleteUser }
 
