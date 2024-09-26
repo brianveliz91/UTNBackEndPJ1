@@ -46,8 +46,37 @@ const getUserById = (id) => {
 
 const addUser = (user) => {
     try {
-    } catch (error) { }
-}
+        const { name, lastName, email, password } = user;
+
+        if (!name || !lastName || !email || !password) {
+            throw new Error("Missing data");
+        }
+
+        const hashedPassword = createHash("sha256").update(password).digest("hex");
+
+        const newUser = {
+            id: randomUUID(),
+            name,
+            lastName,
+            email,
+            password: hashedPassword,
+            isLoggedIn: false,
+        };
+
+        const users = getUsers(PATH_FILE_USER);
+
+        if (users.find(u => u.email === email)) {
+            throw new Error("User with this email already exists");
+        };
+        users.push(newUser);
+        writeFileSync(PATH_FILE_USER, JSON.stringify(users));
+        return newUser;
+
+    } catch (error) {
+        const objError = handleError(error, PATH_FILE_ERROR);
+        return objError;
+    }
+};
 
 
 
