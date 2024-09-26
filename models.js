@@ -117,10 +117,10 @@ const updateUser = (id, dataUser) => {
 
 const userToUpdate = {
     id: "11b8285f-a153-411c-850f-d37b20546386",
-    name: "PRUEBA",
-    lastName: "PEREZ",
-    email: "claudioveliz@example.com",
-    password: "David123"
+    name: "brian",
+    lastName: "veliz",
+    email: "velizbrian@example.com",
+    password: "brian123"
 }
 
 const deleteUser = (id) => {
