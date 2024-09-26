@@ -26,11 +26,21 @@ const getUsers = (urlfile) => {
 
 const getUserById = (id) => {
     try {
+        if (!id) {
+            throw new Error("ID is missing");
+        }
+        const users = getUsers(PATH_FILE_USER);
+        const user = users.find(user => user.id === id);
 
+        if (!user) {
+            throw new Error("User not found");
+        }
+        return user;
     } catch (error) {
-
+        const objError = handleError(error, PATH_FILE_ERROR);
+        return objError;
     }
-}
+};
 
 
 
