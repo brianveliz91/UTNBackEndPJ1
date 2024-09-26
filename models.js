@@ -1,38 +1,27 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs"
 import { randomUUID } from "node:crypto"
-//averiguar que importar de NODE para realizar el hash del pass
-//averiguar como "activar" la lectura de las variables de entorno del archivo .env (dotenv)
 import { handleError } from "./utils/handleError.js"
 
-//1- recuperar variables de entorno
-//2- declarar los metodos
-
-//const userPath = path.join("./data/user.json")
-
 const PATH_FILE_USER = process.env.PATH_FILE_USER;
-//console.log(PATH_FILE_USER)
+const PATH_FILE_ERROR = process.env.PATH_FILE_ERROR;
 
-const getUsers = (urlFile) => {
+const getUsers = (urlfile) => {
     try {
-        if (!urlFile) {
-            throw new Error("Access Denied");
+        if (!urlfile) {
+            throw new Error("Access denied")
         }
-
+        const exists = existsSync(PATH_FILE_USER);
         if (!exists) {
             writeFileSync(PATH_FILE_USER, JSON.stringify([]));
             return [];
         }
-
         const users = JSON.parse(readFileSync(PATH_FILE_USER));
         return users;
     } catch (error) {
-        const objError = "./error/log.json"
-        handleError(error, objError)
-        return error.message;
-
+        const objError = handleError(error, PATH_FILE_ERROR);
+        return objError;
     }
-}
-
+};
 
 
 const getUserById = (id) => {
@@ -43,20 +32,14 @@ const getUserById = (id) => {
     }
 }
 
-//addUser recibe un objeto con toda la data para el nuevo usuario
-//valida que esten los datos minimos para añadir un nuevo usuario
-//valida que el nombre sea un string
-//valida que el apellido sea un string
-//valida que el email sea un string y que no 
+
 
 const addUser = (user) => {
     try {
     } catch (error) { }
 }
 
-//todos los datos del usuario seleccionado se podrian modificar menos el ID
-//si se modifica la pass deberia ser nuevamente hasheada
-//si se modifica el email, validad que este no exista
+
 
 /*const updateUser(userData) => {
     try{
