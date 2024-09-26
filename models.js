@@ -1,6 +1,6 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs"
-import { randomUUID } from "node:crypto"
-import { handleError } from "./utils/handleError.js"
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { randomUUID, createHash } from "node:crypto";
+import { handleError } from "./utils/handleError.js";
 import dotenv from 'dotenv';
 
 dotenv.config();
